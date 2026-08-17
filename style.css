@@ -1,0 +1,818 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#090909;
+    --card:#171717;
+    --purple:#8f5cff;
+    --purple-light:#cab8ff;
+    --gold:#d7b06b;
+    --text:#ffffff;
+    --muted:#d4d4d4;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:#090909;
+    overflow-x:hidden;
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+#bgParticles{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.museum-nav{
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:15px;
+
+    display:flex;
+    gap:8px;
+
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(10px);
+
+    padding:10px;
+    border-radius:999px;
+
+    z-index:9999;
+
+    max-width:95vw;
+    overflow-x:auto;
+}
+
+.museum-nav button{
+    border:none;
+    cursor:pointer;
+
+    padding:10px 14px;
+
+    border-radius:999px;
+
+    color:white;
+
+    background:rgba(255,255,255,.08);
+
+    white-space:nowrap;
+}
+
+/* =========================
+   ROOMS
+========================= */
+
+.room{
+    display:none;
+    min-height:100vh;
+
+    padding:40px 20px 140px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.room.active{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Museum effect */
+
+.room::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(255,255,255,.05),
+        rgba(0,0,0,.5)
+    );
+
+    z-index:-1;
+}
+
+.room::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:25%;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        transparent
+    );
+
+    z-index:-1;
+}
+
+/* =========================
+   ROOM BACKGROUNDS
+========================= */
+
+#doorRoom{
+    background:
+    radial-gradient(circle at top,#2f2153,#080808);
+}
+
+#galleryRoom{
+    background:
+    radial-gradient(circle at top,#3d3223,#111);
+}
+
+#apologyRoom{
+    background:
+    radial-gradient(circle at top,#4a3422,#111);
+}
+
+#reflectionRoom{
+    background:
+    radial-gradient(circle at top,#22385a,#090909);
+}
+
+#treatyRoom{
+    background:
+    radial-gradient(circle at top,#24422f,#090909);
+}
+
+#finalRoom{
+    background:
+    radial-gradient(circle at top,#3d285d,#090909);
+}
+
+#celebrationRoom{
+    background:
+    radial-gradient(circle at top,#5f2a93,#090909);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:100%;
+    max-width:1200px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.room-tag{
+    color:var(--gold);
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+.hero-title{
+    font-family:'Cinzel',serif;
+    font-size:clamp(2.5rem,8vw,5rem);
+    margin-bottom:15px;
+}
+
+h2{
+    font-family:'Cinzel',serif;
+    font-size:clamp(2rem,6vw,4rem);
+    margin-bottom:15px;
+}
+
+.hero-text,
+.section-text{
+    max-width:700px;
+    margin:auto;
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    margin-top:30px;
+
+    border:none;
+    cursor:pointer;
+
+    padding:16px 28px;
+
+    border-radius:999px;
+
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--purple),
+        var(--purple-light)
+    );
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.secondary-btn{
+    background:#2a2a2a;
+}
+
+/* =========================
+   DOOR
+========================= */
+
+.door-wrapper{
+    margin:40px auto;
+    position:relative;
+    display:flex;
+    justify-content:center;
+}
+
+.door-glow{
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(143,92,255,.35),
+        transparent
+    );
+
+    filter:blur(40px);
+}
+
+.door-frame{
+    width:320px;
+    height:450px;
+
+    border-radius:160px 160px 0 0;
+
+    overflow:hidden;
+
+    border:8px solid #70461f;
+
+    position:relative;
+
+    perspective:2000px;
+}
+
+.door{
+    position:absolute;
+    top:0;
+
+    width:50%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #73461f,
+        #3c2615
+    );
+
+    transition:1.8s;
+}
+
+.left-door{
+    left:0;
+    transform-origin:left center;
+}
+
+.right-door{
+    right:0;
+    transform-origin:right center;
+}
+
+.open-door .left-door{
+    transform:rotateY(-125deg);
+}
+
+.open-door .right-door{
+    transform:rotateY(125deg);
+}
+
+.door-panel{
+    position:absolute;
+    inset:20px;
+    border:2px solid rgba(255,255,255,.1);
+}
+
+.door-panel-inner{
+    position:absolute;
+    inset:50px;
+    border:2px solid rgba(255,255,255,.08);
+}
+
+.door-handle{
+    position:absolute;
+    top:50%;
+    width:12px;
+    height:12px;
+    background:gold;
+    border-radius:50%;
+}
+
+.left-door .door-handle{
+    right:12px;
+}
+
+.right-door .door-handle{
+    left:12px;
+}
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery-grid{
+    display:grid;
+    gap:20px;
+    margin-top:35px;
+}
+
+.gallery-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:25px;
+
+    border-radius:24px;
+}
+
+.card-icon{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope{
+    width:min(340px,90vw);
+    height:220px;
+
+    margin:40px auto;
+
+    border-radius:20px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    color:#222;
+
+    background:
+    linear-gradient(
+        135deg,
+        #f6e8cb,
+        #e5cf9f
+    );
+}
+
+.seal{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.letter-box{
+    display:none;
+}
+
+.letter{
+
+    max-width:850px;
+
+    margin:auto;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fffdf8,
+        #f7f0e3
+    );
+
+    color:#222;
+
+    padding:40px;
+
+    border-radius:24px;
+
+    text-align:left;
+
+    line-height:2;
+
+    font-size:1.05rem;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.25);
+
+    border:2px solid
+    rgba(215,176,107,.4);
+}
+
+.letter p{
+    margin-bottom:18px;
+}
+
+.letter-sign{
+    margin-top:30px;
+    font-weight:700;
+    color:#6d46ff;
+}
+
+/* =========================
+   REFLECTION
+========================= */
+
+.quote-card{
+    margin-top:30px;
+
+    background:rgba(255,255,255,.06);
+
+    padding:30px;
+
+    border-radius:24px;
+}
+
+.quote{
+    font-family:'Cinzel',serif;
+    font-size:1.6rem;
+    line-height:1.7;
+}
+
+/* =========================
+   TREATY
+========================= */
+
+.treaty{
+    max-width:800px;
+    margin:35px auto;
+
+    display:grid;
+    gap:15px;
+}
+
+.rule{
+    display:flex;
+    gap:12px;
+    align-items:center;
+
+    text-align:left;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.06);
+}
+
+.rule input{
+    width:20px;
+    height:20px;
+}
+
+/* =========================
+   FINAL ROOM
+========================= */
+
+.confirm-buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    margin-top:30px;
+}
+
+/* =========================
+   CERTIFICATE
+========================= */
+
+.success-pill{
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:rgba(143,92,255,.25);
+
+    margin-bottom:20px;
+}
+
+.certificate{
+    max-width:800px;
+
+    margin:35px auto;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fff4d0,
+        #f0deb0
+    );
+
+    color:#222;
+}
+
+.certificate h4{
+    margin:15px 0;
+    font-size:2rem;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:900px){
+
+    .gallery-grid{
+        grid-template-columns:
+        repeat(4,1fr);
+    }
+
+    .door-frame{
+        width:420px;
+        height:600px;
+    }
+
+    .quote{
+        font-size:2rem;
+    }
+}
+/* =========================
+   REAL MUSEUM ROOM EFFECT
+========================= */
+
+.room{
+    position:relative;
+    overflow:hidden;
+}
+
+/* Back Wall */
+
+.room::before{
+
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    height:78%;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(255,255,255,.04),
+        rgba(0,0,0,.2)
+    );
+
+    z-index:-2;
+}
+
+/* Wooden Floor */
+
+.room::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:22%;
+
+    background:
+    repeating-linear-gradient(
+        90deg,
+        #4a2d1b 0px,
+        #4a2d1b 40px,
+        #3a2316 40px,
+        #3a2316 80px
+    );
+
+    box-shadow:
+    inset 0 20px 40px rgba(0,0,0,.5);
+
+    z-index:-1;
+}
+
+/* Gallery Room */
+
+#galleryRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #4b3a2b,
+        #2b2119
+    );
+}
+
+/* Letter Room */
+
+#apologyRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #5b4634,
+        #2b2119
+    );
+}
+
+/* Reflection Room */
+
+#reflectionRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #32425a,
+        #1a2435
+    );
+}
+
+/* Treaty Room */
+
+#treatyRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #314835,
+        #18281c
+    );
+}
+
+/* Final Room */
+
+#finalRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #49335f,
+        #24192f
+    );
+}
+
+/* Celebration */
+
+#celebrationRoom{
+    background:
+    linear-gradient(
+        180deg,
+        #5d2c8c,
+        #24133a
+    );
+}
+
+.container{
+    position:relative;
+}
+
+/* Ceiling Light */
+
+.container::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-250px;
+    left:50%;
+
+    transform:
+    translateX(-50%);
+
+    width:500px;
+    height:500px;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,255,220,.15),
+        transparent 70%
+    );
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+.gallery-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2c2c2c,
+        #1a1a1a
+    );
+
+    border:8px solid #9b7443;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.35);
+
+    border-radius:12px;
+}
+.hidden-text{
+    display:none;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.08);
+
+    line-height:1.8;
+}
+
+.stats-grid{
+    display:grid;
+    gap:20px;
+    margin-top:30px;
+}
+
+.stat-card{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+}
+
+.stat-card h3{
+    font-size:2rem;
+    color:#d7b06b;
+}
+
+.oath-box{
+
+    max-width:700px;
+
+    margin:40px auto 0;
+
+    text-align:center;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.08);
+}
+
+#oathText{
+
+    font-size:1.1rem;
+
+    margin-bottom:20px;
+
+    line-height:1.8;
+}

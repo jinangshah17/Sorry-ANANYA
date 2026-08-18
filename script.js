@@ -633,3 +633,29 @@ if(giftBtn){
     );
 
 }
+const music = document.getElementById("bgMusic");
+
+window.addEventListener("load", () => {
+
+    music.volume = 0.15;
+
+    music.play().catch(() => {
+
+        document.addEventListener(
+            "click",
+            () => {
+                music.play();
+            },
+            { once: true }
+        );
+
+    });
+
+});
+if(music){
+
+    music.volume = 0.15;
+
+    music.play().catch(() => {});
+
+}
